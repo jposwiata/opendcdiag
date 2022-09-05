@@ -26,6 +26,9 @@
  * @endparblock
  */
 
+#define SANDSTONE_EIGEN_VECTORIZATION SANDSTONE_EIGEN_AVX2
+#include <sandstone_eigen_configurator.h>
+
 #include "sandstone_eigen_common.h"
 
 using namespace Eigen;
