@@ -61,6 +61,10 @@
   __asm__ volatile ("tilerelease" ::);
 #endif
 
+#define AMX_TILE_PACKING_FACTOR 4
+#define AMX_MAX_TILE_ROWS 16
+#define AMX_MAX_TILE_BYTES_IN_ROW 64
+
 struct amx_tileconfig
 {
     uint8_t palette;
