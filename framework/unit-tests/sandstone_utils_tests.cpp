@@ -39,6 +39,9 @@ TEST(SandstoneTime, WallClockTime)
 
 TEST(SandstoneTime, CpuTime)
 {
+    // cpu time has 1ms resolution, with expected delta=500us
+    constexpr uint32_t cpu_time_resolution = 500;
+
     constexpr uint32_t num = 1024;
     void* ptr[num] = { };
     uint32_t filled = 0;
@@ -69,8 +72,9 @@ TEST(SandstoneTime, CpuTime)
     uint64_t proc_user = sandstone_user_cpu_time(start_user);
     ASSERT_GE(start_user, 0);
 
+    // single core execution is expected, cpu time should not exceed wallclock time
     uint64_t proc_wall = sandstone_wall_clock_time(start_wall);
-    ASSERT_LE(proc_sys + proc_user, proc_wall);
+    ASSERT_LE(proc_sys + proc_user, proc_wall + 2 * cpu_time_resolution);
 }
 
 TEST(SimpleStringUtils, GivenEmptyString_WhenConvertedToMilisecs_ThenReturnZero) {
